@@ -2,7 +2,7 @@
 $conn = new mysqli("localhost", "words", "lOHzldtUbeT7SStQ", "words", 3306);
 $text = explode(" ", preg_replace("/[^A-Z0-9 ]/", '', strtoupper($_GET['text'])));
 
-for ($n = 10; $n > 0; $n--) {
+for ($n = 3; $n > 0; $n--) {
         if (count($text) >= $n) {
                 for ($i = 0; $i <= count($text) - $n; $i++) {
                         $word = trim($text[$i]);
