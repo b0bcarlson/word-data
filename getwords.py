@@ -15,5 +15,6 @@ for comment in all_comments:
                 already_done.add(comment.id)
                 co= re.escape(comment.body.encode('utf-8'))
                 print "Processing comment number " +str(i)
+                print co
                 i+=1
                 os.system("php-cgi -f wordscript.php text=\"" + co + "\"")
