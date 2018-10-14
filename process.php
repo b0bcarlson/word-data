@@ -1,7 +1,7 @@
 <?php
 include("config.php");
 $text = explode(" ", preg_replace("/[^A-Z0-9 ]/", '', strtoupper($_GET['text'])));
-$n = int($_GET["length"]);
+$n = intval($_GET["length"]);
 if ($n != 1 && $n != 2 && $n !=2){
 die();
 }
@@ -9,7 +9,7 @@ $table="words".$n;
 
 $query = "CREATE TEMPORARY TABLE `words` ( `id` int(11) NOT NULL, `word` varchar(255) NOT NULL, `datacount` int(11) NOT NULL, `anacount` int(11) NOT NULL)";
 $conn->query($query);
-$query = "ALTER TABLE `words` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`), ADD UNIQUE KEY `word` (`word`), MODIFY `id` int(11) NOT NULL AUTO_INCREMEN$
+$query = "ALTER TABLE `words` ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`), ADD UNIQUE KEY `word` (`word`), MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 $conn->query($query);
 
 if (count($text) >= $n) {
