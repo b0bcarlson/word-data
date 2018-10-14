@@ -19,3 +19,6 @@ Using $days and $count, words are removed. This is used to remove words that are
 The higher $days is, the more days the word (or binomal or trinomal) is kept.
 The lower $count is, the more likely a word will be removed.
 This script is useful for when somebody makes up words or as a result of out of context text. This script is very important, but must be used with caution, as it could potentially remove more than expected.
+
+## process.php
+This part of the project is not yet complete.
