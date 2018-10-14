@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "words", "lOHzldtUbeT7SStQ", "words", 3306);
+include("config.php");
 $text = explode(" ", preg_replace("/[^A-Z0-9 ]/", '', strtoupper($_GET['text'])));
 
 for ($n = 3; $n > 0; $n--) {
