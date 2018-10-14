@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 import praw
-import subprocess
 import re
-import requests
 import os
-import time
 r = praw.Reddit(user_agent='Most common words 1.0', site_name='ibs')
 already_done = set()
 i=1
