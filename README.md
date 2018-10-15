@@ -2,13 +2,13 @@
 Source for retrieving words (binomals, trinomals, etc) from Reddit, and updating the database.
 
 This project relies on PRAW. praw.ini required, user is "ibs".
-Words are retrieved only with Python. All logic and processing is done through PHP.
+Words are retrieved and processed with Python. Some logic and processing is done through PHP.
 
 Assumed tables "words1", "words2", and "words3" already created in MySQL. 
 config.php should contain the $conn for the MySQL connection; $days and $count for how long and which "old" words should be kept (see below).
 
 ## getwords.py
-Uses PRAW to grab an array of comments. Each comment is sent to wordscript.php
+Uses PRAW to grab a comment, is analyzed for quality (not spam, in English, contains at least 2 spaces). Each comment is sent to wordscript.php
 
 ## wordscipt.php
 The input string is uppercased and any character that is not alphanumeric or a space is removed. The string is converted to an array by the spaces.
