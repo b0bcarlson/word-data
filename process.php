@@ -34,4 +34,29 @@ if (count($text) >= $n) {
                         }
                 }
         }
+        $query = "SELECT SUM(datacount) AS data, SUM(anacount) AS ana FROM `words`";
+        $result = $conn->query($query);
+        if (!$result) {
+                die("An error has occured");
+        }
+        else {
+                $row = $result->fetch_assoc();
+                $datatotal = $row["data"];
+                $anatotal = $row["ana"];
+                $word="";
+                $score=0;
+                $anascore=0;
+                $datascore=0;
+                $query = "SELECT * FROM `words`";
+                $result = $conn->query($query);
+                while ($row = $result->fetch_assoc()) {
+                        if ((($row["anacount"] / $anatotal) / ($row["datacount"] / $datatotal)) > $score) {
+                                $word = $row["word"];
+                                $score = ($row["anacount"] / $anatotal) / ($row["datacount"] / $datatotal);
+                                $anascore = $row["anacount"] / $anatotal;
+                                $datascore = $row["datacount"] / $datatotal;
+                        }
+                }
+                echo $word . " " . $score . " " . $anascore . "/" . $datascore;
+        }
 }
