@@ -22,3 +22,4 @@ This script is useful for when somebody makes up words or as a result of out of 
 
 ## process.php
 This part of the project is not yet complete.
+Using the input data, this script will choose what words (or phrases) are significant. The idea is that you can insert a string to get a general idea of what the topic is.
