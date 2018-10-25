@@ -13,7 +13,7 @@ for ($n = 3; $n > 0; $n--) {
                                 if (count(explode(" ", trim($word))) == $n) {
                                         $word = trim($word);
                                         $name = "words".$n;
-                                        $query = "INSERT INTO $name (word, count) VALUES ('$word','1') ON DUPLICATE KEY UPDATE count = count + 1";
+                                        $query = "INSERT INTO $name (word, count) VALUES ('$word','1') ON DUPLICATE KEY UPDATE count = count + 1, created = NOW()";
                                         $result = $conn->query($query);
                                 }
                         }
