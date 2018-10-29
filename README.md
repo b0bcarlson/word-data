@@ -18,7 +18,8 @@ For each trinomal, binomal, and word, each is further processed (nothing too lon
 Using $days and $count, words are removed. This is used to remove words that are likely not actual words.
 The higher $days is, the more days the word (or binomal or trinomal) is kept.
 The lower $count is, the more likely a word will be removed.
-This script is useful for when somebody makes up words or as a result of out of context text. This script is very important, but must be used with caution, as it could potentially remove more than expected.
+This script is useful for when somebody makes up words or as a result of out of context text. This script is very important, but must be used with caution, as it could potentially remove more than intended.
+I am still, and will for the forseeable future, adjusting exactly this file to remove as much junk as possible while attempting to preserve useful data.
 
 ## process.php
 This part of the project is not yet complete.
