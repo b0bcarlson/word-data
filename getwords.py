@@ -23,7 +23,7 @@ for comment in all_comments:
                         co = co.split()
                         for w in co:
                                 words[w] += 1
-                        for x in range(2,4):
+                        for x in range(2,6):
                                 for ind in range(0, len(co) + 1 - x):
                                         word = ""
                                         for w in range(x):
