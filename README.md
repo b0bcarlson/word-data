@@ -1,5 +1,5 @@
 # word-data
-Source for retrieving words (binomals, trinomals, etc) from Reddit, and updating the database.
+Source for retrieving words (binomials, trinomials, etc) from Reddit, and updating the database.
 
 This project relies on PRAW. praw.ini required, user is "ibs".
 Words are retrieved and processed with Python. Some logic and processing is done through PHP.
@@ -12,11 +12,11 @@ Uses PRAW to grab a comment, is analyzed for quality (not spam, in English, cont
 
 ## wordscipt.php
 The input string is uppercased and any character that is not alphanumeric or a space is removed. The string is converted to an array by the spaces.
-For each trinomal, binomal, and word, each is further processed (nothing too long to clearly be a word or obviously a link). Then each word is added to the table and incremented.
+For each trinomial, binomial, and word, each is further processed (nothing too long to clearly be a word or obviously a link). Then each word is added to the table and incremented.
 
 ## cleandatabase.php
 Using $days and $count, words are removed. This is used to remove words that are likely not actual words.
-The higher $days is, the more days the word (or binomal or trinomal) is kept.
+The higher $days is, the more days the word (or binomial or trinomial) is kept.
 The lower $count is, the more likely a word will be removed.
 This script is useful for when somebody makes up words or as a result of out of context text. This script is very important, but must be used with caution, as it could potentially remove more than intended.
 I am still, and will for the forseeable future, adjusting exactly this file to remove as much junk as possible while attempting to preserve useful data.
