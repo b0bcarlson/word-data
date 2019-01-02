@@ -4,7 +4,7 @@ Source for retrieving words (binomials, trinomials, etc) from Reddit, and updati
 This project relies on PRAW. praw.ini required, user is "ibs".
 Words are retrieved and processed with Python. Some logic and processing is done through PHP.
 
-Assumed tables "words1", "words2", and "words3" already created in MySQL. 
+Assumed tables "words1" through "words5" already created in MySQL. 
 config.php should contain the $conn for the MySQL connection; $days and $count for how long and which "old" words should be kept (see below).
 
 ## getwords.py
