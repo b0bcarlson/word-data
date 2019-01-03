@@ -8,6 +8,7 @@ Assumed tables "words1" through "words5" already created in MySQL.
 config.php should contain the $conn for the MySQL connection; $days and $count for how long and which "old" words should be kept (see below).
 
 ## getwords.py
+`python getwords.py <number of comments to fetch>`
 Uses PRAW to grab a comment, is analyzed for quality (not spam, in English, contains at least 2 spaces). Each comment is sent to wordscript.php
 
 ## wordscipt.php
