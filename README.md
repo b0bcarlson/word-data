@@ -9,6 +9,7 @@ config.php should contain the $conn for the MySQL connection; $days and $count f
 
 ## getwords.py
 `python getwords.py <number of comments to fetch>`
+
 Uses PRAW to grab a comment, is analyzed for quality (not spam, in English, contains at least 2 spaces). Each comment is sent to wordscript.php
 
 ## wordscipt.php
