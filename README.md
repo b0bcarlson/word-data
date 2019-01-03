@@ -10,11 +10,10 @@ config.php should contain the $conn for the MySQL connection; $days and $count f
 ## getwords.py
 `python getwords.py <number of comments to fetch>`
 
-Uses PRAW to grab a comment, is analyzed for quality (not spam, in English, contains at least 2 spaces). Each comment is sent to wordscript.php
+Uses PRAW to grab a comment, the input string is uppercased and any character that is not alphanumeric or a space is removed, then is analyzed for quality (not spam, in English, contains at least 2 spaces).  The string is converted to an array by the spaces. All the comments are broken down into their respective words through 5nomials and the result is passed to `wordscript.php`
 
 ## wordscipt.php
-The input string is uppercased and any character that is not alphanumeric or a space is removed. The string is converted to an array by the spaces.
-For each trinomial, binomial, and word, each is further processed (nothing too long to clearly be a word or obviously a link). Then each word is added to the table and incremented.
+Takes the input string, processes it into a 2D array (one array for each table), then each array is passed through an insert statement to insert or update the respective row.
 
 ## cleandatabase.php
 Using $days and $count, words are removed. This is used to remove words that are likely not actual words.
@@ -26,3 +25,6 @@ I am still, and will for the forseeable future, adjusting exactly this file to r
 ## process.php
 This part of the project is not yet complete.
 Using the input data, this script will choose what words (or phrases) are significant. The idea is that you can insert a string to get a general idea of what the topic is.
+
+## gen.php
+This is a work in progress, see the commits for more information. The end result will be to use the data to create sentences.
