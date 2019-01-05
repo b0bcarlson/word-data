@@ -21,7 +21,7 @@ for comment in all_comments:
         if not any(n in comment.author.name.lower() for n in users) and not any(i in comment.body.lower().encode('utf-8') for i in disallowed) and comment.body.count(" ") > 1:
                 already_done.add(comment.id)
                 co = re.escape(comment.body.encode('utf-8'))
-                co = re.sub(r'[^A-Z \n]', r'', co.upper())
+                co = re.sub(r'[^A-Z \n]', r'', co.upper().trim()).trim()
                 if not prog.search(co):
                         co = co.split()
                         for w in co:
