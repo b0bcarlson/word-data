@@ -1,6 +1,6 @@
 <?php
 include("config.php");
-for ($n = 1; $n <= 3; $n++){
+for ($n = 1; $n <= 5; $n++){
         $table = "words".$n;
         $inv = $days * $n;
         $inv2 = $days * ($n * $n);
