@@ -7,7 +7,9 @@ import json
 import urllib
 import sys
 from collections import defaultdict
+from tendo import singleton
 
+me = singleton.SingleInstance()
 r = praw.Reddit(user_agent='Most common words 1.0', site_name='ibs')
 already_done = set()
 for iter in range(10):
