@@ -13,7 +13,7 @@ config.php should contain the $conn for the MySQL connection; $days and $count f
 
 Uses PRAW to grab a comment, the input string is uppercased and any character that is not alphanumeric or a space is removed, then is analyzed for quality (not spam, in English, contains at least 2 spaces).  The string is converted to an array by the spaces. All the comments are broken down into their respective words through 5nomials and the result is passed to `wordscript.php`
 
-## wordscipt.php
+## wordscript.php
 Takes the input string, processes it into a 2D array (one array for each table), then each array is passed through an insert statement to insert or update the respective row.
 
 ## cleandatabase.php
