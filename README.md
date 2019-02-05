@@ -5,7 +5,6 @@ This project relies on PRAW. praw.ini required, user is "ibs".
 Additionally requires python module `tendo` to ensure that only one instance is running.
 Words are retrieved and processed with Python. Python passes the data to Php which updates the SQL tables.
 
-Assumed tables "words1" through "words5" already created in MySQL. 
 config.php should contain the $conn for the MySQL connection; $days and $count for how long and which "old" words should be kept (see below).
 
 
