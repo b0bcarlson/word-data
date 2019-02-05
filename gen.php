@@ -1,4 +1,5 @@
 <?php
+$plen=4;
 include("config.php");
 
   function getRandomWeightedElement(array $weightedValues) {
@@ -11,21 +12,25 @@ include("config.php");
       }
     }
   }
-$query = "SELECT `word`,`count` FROM `words1` ORDER BY `count` DESC LIMIT 100";
+$name="words".$plen;
+$query = "SELECT `word`,`count` FROM `$name` ORDER BY `start` DESC LIMIT 100";
 $result = $conn->query($query);
 for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
 $word=getRandomWeightedElement($set);
-$sen=$word;
-$query = "SELECT `word`,`count` FROM `words2` WHERE `word` LIKE '$word %' ORDER BY `count` DESC LIMIT 100";
-$result = $conn->query($query);
-for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
-$word=substr(getRandomWeightedElement($set), strlen($word)+1);
-$sen=$sen." ".$word;
-for($i=0;$i<10;$i++){
-        $query = "SELECT `word`,`count` FROM `words3` WHERE `word` LIKE '$word %' ORDER BY `count` DESC LIMIT 100";
-        $result = $conn->query($query);
-        for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
-        $word=substr(getRandomWeightedElement($set), strlen($word)+1);
-        $sen=$sen." ".$word;
+$sen=explode(" ",$word);
+while(True){
+        $searchstring=implode(" ",array_slice($sen,-1*($plen-1)))." %";
+        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' ORDER BY `count` DESC LIMIT 10";
+        $result=$conn->query($query);
+        for ($set = array (); $row = $result->fetch_assoc(); $set[$row['id']] = $row['count']);
+        $id = getRandomWeightedElement($set);
+        $query = "SELECT `word`,`count`,`end` FROM `$name` WHERE `id`=$id LIMIT 1";
+        $result=$conn->query($query);
+        $row=$result->fetch_assoc();
+        $word=explode(" ", $row['word']);
+        $sen[]=end($word);
+        echo implode(" ",$sen)."\n";
+        echo $row['end']."/".$row['count']."\n";
+        if(rand(1,$row['count'])<=$row['end'])
+                break;
 }
-echo $sen;
