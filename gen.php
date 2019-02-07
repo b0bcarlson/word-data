@@ -20,9 +20,14 @@ $word=getRandomWeightedElement($set);
 $sen=explode(" ",$word);
 while(True){
         $searchstring=implode(" ",array_slice($sen,-1*($plen-1)))." %";
-        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' ORDER BY `count` DESC LIMIT 10";
+        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' AND `count` > 1 ORDER BY `count` DESC LIMIT 10";
         $result=$conn->query($query);
         for ($set = array (); $row = $result->fetch_assoc(); $set[$row['id']] = $row['count']);
+        if($result->num_rows==0){
+                echo $result->num_rows. " ".implode(" ",$sen)."\n";
+                $sen = array_slice($sen, 0, -2);
+                continue;
+        }
         $id = getRandomWeightedElement($set);
         $query = "SELECT `word`,`count`,`end` FROM `$name` WHERE `id`=$id LIMIT 1";
         $result=$conn->query($query);
