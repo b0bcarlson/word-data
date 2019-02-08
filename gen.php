@@ -12,30 +12,41 @@ include("config.php");
       }
     }
   }
+function helper($sen, $conn, $plen, $name) {
+        $rand = sha1(serialize($sen));
+        $searchstring=implode(" ",array_slice($sen,-1*($plen-1)))." %";
+        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' AND `count` > 5 ORDER BY `count` DESC LIMIT 10";
+        $result=$conn->query($query);
+        for ($set = array (); $row = $result->fetch_assoc(); $set[$row['id']] = $row['count']);
+        if($result->num_rows==0){
+                return False;
+        }
+        while(True){
+                $id = getRandomWeightedElement($set);
+                $query = "SELECT `word`,`count`,`end` FROM `$name` WHERE `id`=$id LIMIT 1";
+                $result=$conn->query($query);
+                $row=$result->fetch_assoc();
+                $word=explode(" ", $row['word']);
+                $tsen=$sen;
+                $tsen[]=end($word);
+                $helperresult=helper($tsen,$conn,$plen,$name);
+                if($helperresult===False){
+                        unset($set[$id]);
+                        echo"\nNUMBER OF ROWS REMAINING: ".count($set)." AT POINT $rand\n";
+                }
+                else{
+                        return $helperresult;
+                }
+                echo implode(" ",$sen)."\n";
+                echo $row['end']."/".$row['count']."\n";
+                if(count($set)==0)
+                        return False;
+        }
+}
 $name="words".$plen;
 $query = "SELECT `word`,`count` FROM `$name` ORDER BY `start` DESC LIMIT 100";
 $result = $conn->query($query);
 for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
 $word=getRandomWeightedElement($set);
 $sen=explode(" ",$word);
-while(True){
-        $searchstring=implode(" ",array_slice($sen,-1*($plen-1)))." %";
-        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' AND `count` > 1 ORDER BY `count` DESC LIMIT 10";
-        $result=$conn->query($query);
-        for ($set = array (); $row = $result->fetch_assoc(); $set[$row['id']] = $row['count']);
-        if($result->num_rows==0){
-                echo $result->num_rows. " ".implode(" ",$sen)."\n";
-                $sen = array_slice($sen, 0, -2);
-                continue;
-        }
-        $id = getRandomWeightedElement($set);
-        $query = "SELECT `word`,`count`,`end` FROM `$name` WHERE `id`=$id LIMIT 1";
-        $result=$conn->query($query);
-        $row=$result->fetch_assoc();
-        $word=explode(" ", $row['word']);
-        $sen[]=end($word);
-        echo implode(" ",$sen)."\n";
-        echo $row['end']."/".$row['count']."\n";
-        if(rand(1,$row['count'])<=$row['end'])
-                break;
-}
+var_dump(helper($sen, $conn,$plen,$name));
