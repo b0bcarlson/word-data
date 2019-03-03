@@ -21,7 +21,7 @@ function helper($sen, $conn, $plen, $name) {
                         return $sen;
         }
         $searchstring=implode(" ",array_slice($sen,-1*($plen-1)))." %";
-        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' AND `count` > 5 ORDER BY `count` DESC LIMIT 10";
+        $query="SELECT `id`,`count` FROM `$name` WHERE `word` LIKE '$searchstring' AND `count` > 1 ORDER BY `count` DESC";
         $result=$conn->query($query);
         for ($set = array (); $row = $result->fetch_assoc(); $set[$row['id']] = $row['count']);
         if($result->num_rows==0)
@@ -44,9 +44,13 @@ function helper($sen, $conn, $plen, $name) {
         }
 }
 $name="words".$plen;
-$query = "SELECT `word`,`count` FROM `$name` ORDER BY `start` DESC LIMIT 100";
-$result = $conn->query($query);
-for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
-$word=getRandomWeightedElement($set);
-$sen=explode(" ",$word);
-var_dump(helper($sen, $conn,$plen,$name));
+$ready=False;
+while(!$ready){
+        $query = "SELECT `word`,`count` FROM `$name` ORDER BY `start` DESC";
+        $result = $conn->query($query);
+        for ($set = array (); $row = $result->fetch_assoc(); $set[$row['word']] = $row['count']);
+        $word=getRandomWeightedElement($set);
+        $sen=explode(" ",$word);
+        $ready = helper($sen, $conn,$plen,$name);
+}
+echo implode(" ",$ready);
