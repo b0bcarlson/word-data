@@ -8,7 +8,7 @@ Words are retrieved and processed with Python. Python passes the data to Php whi
 config.php should contain the $conn for the MySQL connection; $days and $count for how long and which "old" words should be kept (see below).
 
 
-Please note: You will need a significant amount of space in your MySQL database. Two days of running every minute with 100 comments each used 2 Gb on my database, around a month later it sat at 21 Gb. If at all possible use SAS or SSD to speed up searches.
+Please note: You will need a significant amount of space in your MySQL database. The amount of space will vary based on how often and with what arguments the script is called.
 
 ## getwords.py
 `python getwords.py <number of comments to fetch>`
